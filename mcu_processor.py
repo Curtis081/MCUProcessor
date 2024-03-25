@@ -10,7 +10,7 @@ class MCUProcessor:
         self.__mcu_data_dict_key = self.__calc_mcu_data_dict_key(self.__mcu_list)
 
         self.__tune_combo_box_text_function_dict = {
-            'MCU型號': None,
+            'MCU型號': self.return_model_name,
             '生產公司': self.find_company_by_model,
             '核心架構': self.find_architecture_by_model,
             '時脈': self.find_clock_by_model,
@@ -41,6 +41,10 @@ class MCUProcessor:
 
     def get_unique_models(self):
         return self.__get_unique("MCU型號")
+
+    @staticmethod
+    def return_model_name(model_name):
+        return model_name
 
     def find_company_by_model(self, model):
         for mcu in self.__mcu_list:

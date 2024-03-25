@@ -60,7 +60,12 @@ class Window(QWidget):
 
     def get_config_item_tune_list(self, combobox_item_name):
         mcu_config_item_tune_list = deepcopy(self.mcu_config_item_list)
-        mcu_config_item_tune_list.remove(combobox_item_name)
+        try:
+            mcu_config_item_tune_list.remove(combobox_item_name)
+        except ValueError:
+            pass
+        except Exception as e:
+            print(e)
         return mcu_config_item_tune_list
 
     def get_combo_box_selected_text(self, combobox_item_name):
@@ -83,8 +88,8 @@ class Window(QWidget):
         item_combo_box.setCurrentText(item_name)
 
     def tune_item_combo_box_text(self, selected_text, config_item_tune_name):
-        # model_config_item_name = "MCU型號"
-        # self.tune_combo_box_text(config_item_tune_name, model_config_item_name, selected_text)
+        model_config_item_name = "MCU型號"
+        self.tune_combo_box_text(config_item_tune_name, model_config_item_name, selected_text)
 
         company_config_item_name = "生產公司"
         self.tune_combo_box_text(config_item_tune_name, company_config_item_name, selected_text)
@@ -97,13 +102,6 @@ class Window(QWidget):
 
         market_config_item_name = "市場"
         self.tune_combo_box_text(config_item_tune_name, market_config_item_name, selected_text)
-
-    def set_model_item_combo_box_current_text(self, selected_models):
-        selected_model = selected_models[0]
-        model_item_name = "MCU型號"
-        _, item_combo_box = self.combo_box_num_dict.get(model_item_name)
-        item_combo_box.setCurrentText(selected_model)
-        return selected_model
 
     def on_model_combobox_selected(self):
         combobox_item_name = "MCU型號"
@@ -118,7 +116,7 @@ class Window(QWidget):
         config_item_tune_list = self.get_config_item_tune_list(combobox_item_name)
         selected_text = self.get_combo_box_selected_text(combobox_item_name)
         selected_models = self.mcu_processor.find_model_by_company(selected_text)
-        selected_model = self.set_model_item_combo_box_current_text(selected_models)
+        selected_model = selected_models[0]
         print("on_company_combobox_selected = %s" % selected_text)
         for mcu_config_item_tune in config_item_tune_list:
             self.tune_item_combo_box_text(selected_model, mcu_config_item_tune)
@@ -128,7 +126,7 @@ class Window(QWidget):
         config_item_tune_list = self.get_config_item_tune_list(combobox_item_name)
         selected_text = self.get_combo_box_selected_text(combobox_item_name)
         selected_models = self.mcu_processor.find_model_by_architecture(selected_text)
-        selected_model = self.set_model_item_combo_box_current_text(selected_models)
+        selected_model = selected_models[0]
         print("on_architecture_combobox_selected = %s" % selected_text)
         for mcu_config_item_tune in config_item_tune_list:
             self.tune_item_combo_box_text(selected_model, mcu_config_item_tune)
@@ -138,7 +136,7 @@ class Window(QWidget):
         config_item_tune_list = self.get_config_item_tune_list(combobox_item_name)
         selected_text = self.get_combo_box_selected_text(combobox_item_name)
         selected_models = self.mcu_processor.find_model_by_clock(selected_text)
-        selected_model = self.set_model_item_combo_box_current_text(selected_models)
+        selected_model = selected_models[0]
         print("on_clock_combobox_selected = %s" % selected_text)
         for mcu_config_item_tune in config_item_tune_list:
             self.tune_item_combo_box_text(selected_model, mcu_config_item_tune)
@@ -148,7 +146,7 @@ class Window(QWidget):
         config_item_tune_list = self.get_config_item_tune_list(combobox_item_name)
         selected_text = self.get_combo_box_selected_text(combobox_item_name)
         selected_models = self.mcu_processor.find_model_by_market(selected_text)
-        selected_model = self.set_model_item_combo_box_current_text(selected_models)
+        selected_model = selected_models[0]
         print("on_market_combobox_selected = %s" % selected_text)
         for mcu_config_item_tune in config_item_tune_list:
             self.tune_item_combo_box_text(selected_model, mcu_config_item_tune)
