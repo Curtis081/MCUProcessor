@@ -1,6 +1,8 @@
 mcu_data = [
     {"MCU型號": "STM32F103C8T6", "生產公司": "STMicroelectronics", "核心架構": "32位元", "時脈": "72MHz", "市場": "通用"},
     {"MCU型號": "STM32F407VG", "生產公司": "STMicroelectronics", "核心架構": "32位元", "時脈": "168MHz", "市場": "高性能"},
+    {"MCU型號": "STM8S207M8T3B", "生產公司": "STMicroelectronics", "核心架構": "8位元", "時脈": "24MHz", "市場": "通用"},
+    {"MCU型號": "STM8L152M8T6", "生產公司": "STMicroelectronics", "核心架構": "8位元", "時脈": "16MHz", "市場": "通用"},
     {"MCU型號": "ATmega328P", "生產公司": "Microchip", "核心架構": "8位元", "時脈": "20MHz", "市場": "通用"},
     {"MCU型號": "PIC16F877A", "生產公司": "Microchip", "核心架構": "8位元", "時脈": "20MHz", "市場": "通用"},
     {"MCU型號": "ESP32", "生產公司": "Espressif Systems", "核心架構": "32位元", "時脈": "240MHz", "市場": "物聯網"},

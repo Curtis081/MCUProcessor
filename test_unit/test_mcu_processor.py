@@ -14,7 +14,7 @@ class TestMCUProcessor:
     def test_init(self):
         mcu_processor = MCUProcessor('ASUS')
         assert mcu_processor is not None
-        assert mcu_processor.get_mcu_list_len() == 2
+        assert mcu_processor.get_mcu_list_len() == 4
 
         mcu_processor_test = MCUProcessor('BTRT')
         assert mcu_processor_test is not None
@@ -23,11 +23,12 @@ class TestMCUProcessor:
     def test_find_mcu_by_company(self):
         mcu_processor = MCUProcessor('ASUS')
         found_mcu = mcu_processor.find_model_by_company("STMicroelectronics")
-        assert len(found_mcu) == 2
+        assert len(found_mcu) == 4
         for mcu in found_mcu:
-            assert mcu in ["STM32F103C8T6", "STM32F407VG"]
+            assert mcu in ["STM32F103C8T6", "STM32F407VG", "STM8S207M8T3B", "STM8L152M8T6"]
         assert "GD32VF103CBT6" not in found_mcu
-        assert mcu_processor.find_model_by_company("STMicroelectronics") == ["STM32F103C8T6", "STM32F407VG"]
+        assert (mcu_processor.find_model_by_company("STMicroelectronics")
+                == ["STM32F103C8T6", "STM32F407VG", "STM8S207M8T3B", "STM8L152M8T6"])
 
         mcu_processor_test = MCUProcessor('BTRT')
         assert mcu_processor_test.find_model_by_company("GigaDevice") == ["GD32VF103CBT6"]
@@ -39,8 +40,8 @@ class TestMCUProcessor:
         mcu_processor = MCUProcessor('ASUS')
         found_mcu = mcu_processor.find_model_by_architecture("32位元")
         assert len(found_mcu) == 2
-        assert mcu_processor.find_model_by_architecture("32位元") == ['STM32F103C8T6', 'STM32F407VG']
-        assert mcu_processor.find_model_by_architecture("8位元") == []
+        assert mcu_processor.find_model_by_architecture("32位元") == ["STM32F103C8T6", "STM32F407VG"]
+        assert mcu_processor.find_model_by_architecture("8位元") == ["STM8S207M8T3B", "STM8L152M8T6"]
 
         mcu_processor_test = MCUProcessor('BTRT')
         assert mcu_processor_test.find_model_by_architecture("32位元") == ["i.MX RT1060", "GD32VF103CBT6"]
@@ -59,7 +60,7 @@ class TestMCUProcessor:
 
     def test_find_model_by_market(self):
         mcu_processor = MCUProcessor('ASUS')
-        assert mcu_processor.find_model_by_market("通用") == ['STM32F103C8T6']
+        assert mcu_processor.find_model_by_market("通用") == ['STM32F103C8T6', 'STM8S207M8T3B', 'STM8L152M8T6']
         assert mcu_processor.find_model_by_market("高性能") == ['STM32F407VG']
 
         mcu_processor_test = MCUProcessor('BTRT')
@@ -71,7 +72,7 @@ class TestMCUProcessor:
     def test_get_unique_models(self):
         mcu_processor = MCUProcessor('ASUS')
         unique_models = mcu_processor.get_unique_models()
-        assert len(unique_models) == 2
+        assert len(unique_models) == 4
         assert "STM32F103C8T6" in unique_models
         assert "STM32F407VG" in unique_models
 
