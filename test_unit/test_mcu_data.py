@@ -25,6 +25,17 @@ class TestMCUData:
             clock_speed = int(entry["時脈"][:-3])  # Convert "72MHz" to 72, for example
             assert 1 <= clock_speed <= 600, "Clock speed must be between 1MHz and 600MHz"
 
+    def test_duplicate_mcu_models(self):
+        model_counts = {}
+        duplicates = []
+        for mcu in mcu_data:
+            model = mcu["MCU型號"]
+            if model in model_counts:
+                duplicates.append(model)
+            else:
+                model_counts[model] = 1
+        assert not duplicates, f"重複的 MCU 型號: {', '.join(duplicates)}"
+
 
 if __name__ == '__main__':
     pytest.main()
