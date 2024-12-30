@@ -1,6 +1,6 @@
 import pytest
-from mcu_processor import MCUProcessor
-from customer_support_data import customer_supported_models
+from src.mcu_processor import MCUProcessor
+from src.customer_support_data import customer_supported_models
 
 
 try:

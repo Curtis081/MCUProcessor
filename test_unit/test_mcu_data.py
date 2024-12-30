@@ -1,6 +1,6 @@
 import pytest
 
-from mcu_data import mcu_data
+from src.mcu_data import mcu_data
 
 
 class TestMCUData:

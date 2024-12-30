@@ -1,6 +1,6 @@
 from copy import deepcopy
-from mcu_data import mcu_data
-from customer_support_data import customer_supported_models
+from src.mcu_data import mcu_data
+from src.customer_support_data import customer_supported_models
 
 
 class MCUProcessor:
